@@ -33,6 +33,7 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
@@ -50,11 +51,14 @@
             this.performanceRAM = new System.Diagnostics.PerformanceCounter();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
-            this.GPU = new System.Diagnostics.PerformanceCounter();
+            this.performanceGPU = new System.Diagnostics.PerformanceCounter();
+            this.metroProgressBar3 = new MetroFramework.Controls.MetroProgressBar();
+            this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.performanceCPU)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.performanceRAM)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GPU)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.performanceGPU)).BeginInit();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -80,7 +84,7 @@
             this.metroProgressBar1.Location = new System.Drawing.Point(127, 93);
             this.metroProgressBar1.Name = "metroProgressBar1";
             this.metroProgressBar1.Size = new System.Drawing.Size(488, 44);
-            this.metroProgressBar1.Style = MetroFramework.MetroColorStyle.Lime;
+            this.metroProgressBar1.Style = MetroFramework.MetroColorStyle.Red;
             this.metroProgressBar1.TabIndex = 2;
             this.metroProgressBar1.Theme = MetroFramework.MetroThemeStyle.Dark;
             // 
@@ -112,7 +116,7 @@
             // metroLabel5
             // 
             this.metroLabel5.AutoSize = true;
-            this.metroLabel5.Location = new System.Drawing.Point(63, 248);
+            this.metroLabel5.Location = new System.Drawing.Point(16, 438);
             this.metroLabel5.Name = "metroLabel5";
             this.metroLabel5.Size = new System.Drawing.Size(44, 19);
             this.metroLabel5.TabIndex = 6;
@@ -121,7 +125,7 @@
             // metroLabel6
             // 
             this.metroLabel6.AutoSize = true;
-            this.metroLabel6.Location = new System.Drawing.Point(63, 284);
+            this.metroLabel6.Location = new System.Drawing.Point(16, 474);
             this.metroLabel6.Name = "metroLabel6";
             this.metroLabel6.Size = new System.Drawing.Size(62, 19);
             this.metroLabel6.TabIndex = 7;
@@ -130,7 +134,7 @@
             // metroLabel7
             // 
             this.metroLabel7.AutoSize = true;
-            this.metroLabel7.Location = new System.Drawing.Point(63, 318);
+            this.metroLabel7.Location = new System.Drawing.Point(16, 508);
             this.metroLabel7.Name = "metroLabel7";
             this.metroLabel7.Size = new System.Drawing.Size(107, 19);
             this.metroLabel7.TabIndex = 8;
@@ -139,7 +143,7 @@
             // metroLabel8
             // 
             this.metroLabel8.AutoSize = true;
-            this.metroLabel8.Location = new System.Drawing.Point(174, 248);
+            this.metroLabel8.Location = new System.Drawing.Point(127, 438);
             this.metroLabel8.Name = "metroLabel8";
             this.metroLabel8.Size = new System.Drawing.Size(30, 19);
             this.metroLabel8.TabIndex = 9;
@@ -148,7 +152,7 @@
             // metroLabel9
             // 
             this.metroLabel9.AutoSize = true;
-            this.metroLabel9.Location = new System.Drawing.Point(174, 284);
+            this.metroLabel9.Location = new System.Drawing.Point(127, 474);
             this.metroLabel9.Name = "metroLabel9";
             this.metroLabel9.Size = new System.Drawing.Size(30, 19);
             this.metroLabel9.TabIndex = 10;
@@ -157,7 +161,7 @@
             // metroLabel10
             // 
             this.metroLabel10.AutoSize = true;
-            this.metroLabel10.Location = new System.Drawing.Point(170, 318);
+            this.metroLabel10.Location = new System.Drawing.Point(123, 508);
             this.metroLabel10.Name = "metroLabel10";
             this.metroLabel10.Size = new System.Drawing.Size(34, 19);
             this.metroLabel10.TabIndex = 11;
@@ -169,7 +173,7 @@
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(63, 375);
+            this.chart1.Location = new System.Drawing.Point(163, 342);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
             series1.ChartArea = "ChartArea1";
@@ -180,9 +184,15 @@
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series2.Legend = "Legend1";
             series2.Name = "RAM";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Legend = "Legend1";
+            series3.Name = "GPU";
+            series3.YValuesPerPoint = 2;
             this.chart1.Series.Add(series1);
             this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(680, 300);
+            this.chart1.Series.Add(series3);
+            this.chart1.Size = new System.Drawing.Size(617, 274);
             this.chart1.TabIndex = 12;
             this.chart1.Text = "chart1";
             // 
@@ -210,17 +220,47 @@
             this.metroLabel11.TabIndex = 13;
             this.metroLabel11.Text = "NameOfProcessor";
             // 
-            // GPU
+            // performanceGPU
             // 
-            this.GPU.CategoryName = "GPU";
-            this.GPU.CounterName = "Utilization Percentage";
-            this.GPU.InstanceName = "_Total";
+            this.performanceGPU.CategoryName = "GPU Engine";
+            this.performanceGPU.CounterName = "Utilization Percentage";
+            this.performanceGPU.InstanceName = "_total";
+            // 
+            // metroProgressBar3
+            // 
+            this.metroProgressBar3.Location = new System.Drawing.Point(127, 238);
+            this.metroProgressBar3.Name = "metroProgressBar3";
+            this.metroProgressBar3.Size = new System.Drawing.Size(488, 44);
+            this.metroProgressBar3.Style = MetroFramework.MetroColorStyle.Lime;
+            this.metroProgressBar3.TabIndex = 14;
+            this.metroProgressBar3.Theme = MetroFramework.MetroThemeStyle.Dark;
+            // 
+            // metroLabel12
+            // 
+            this.metroLabel12.AutoSize = true;
+            this.metroLabel12.Location = new System.Drawing.Point(63, 251);
+            this.metroLabel12.Name = "metroLabel12";
+            this.metroLabel12.Size = new System.Drawing.Size(35, 19);
+            this.metroLabel12.TabIndex = 15;
+            this.metroLabel12.Text = "GPU";
+            // 
+            // metroLabel13
+            // 
+            this.metroLabel13.AutoSize = true;
+            this.metroLabel13.Location = new System.Drawing.Point(636, 251);
+            this.metroLabel13.Name = "metroLabel13";
+            this.metroLabel13.Size = new System.Drawing.Size(20, 19);
+            this.metroLabel13.TabIndex = 16;
+            this.metroLabel13.Text = "%";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 715);
+            this.ClientSize = new System.Drawing.Size(781, 740);
+            this.Controls.Add(this.metroLabel13);
+            this.Controls.Add(this.metroLabel12);
+            this.Controls.Add(this.metroProgressBar3);
             this.Controls.Add(this.metroLabel11);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.metroLabel10);
@@ -241,7 +281,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.performanceCPU)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.performanceRAM)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GPU)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.performanceGPU)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -266,7 +306,10 @@
         private System.Diagnostics.PerformanceCounter performanceRAM;
         private System.Windows.Forms.Timer timer1;
         private MetroFramework.Controls.MetroLabel metroLabel11;
-        private System.Diagnostics.PerformanceCounter GPU;
+        private System.Diagnostics.PerformanceCounter performanceGPU;
+        private MetroFramework.Controls.MetroProgressBar metroProgressBar3;
+        private MetroFramework.Controls.MetroLabel metroLabel12;
+        private MetroFramework.Controls.MetroLabel metroLabel13;
     }
 }
 

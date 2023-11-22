@@ -20,10 +20,13 @@ namespace SystemMonitorByFobox
 
         private float ram; // Записываем данные со счётчиков производительности
 
+        private float gpu;
+
         private ulong installedMemory; // Первоначальное кол-во оперативной памяти
 
         private Queue<float> cpuHistory = new Queue<float>();
         private Queue<float> ramHistory = new Queue<float>();
+        private Queue<float> gpuHistory = new Queue<float>();
         private int historyLength = 60; // Длина истории в секундах
 
         public Form1()
@@ -57,7 +60,7 @@ namespace SystemMonitorByFobox
 
 
         private class MEMORYSTATUSEX                /* Структура MEMORYSTATUSEX содержит информацию о памяти компьютера (общей, доступной и виртуальной). 
-                                                     * Все значения хранятся как 64-битные числа (https://rusproject.narod.ru/winapi/m/memorystatusex.html)*/
+                                       * Все значения хранятся как 64-битные числа (https://rusproject.narod.ru/winapi/m/memorystatusex.html)*/
         {
             public uint dwLenght;                   // Размер структуры в байтах
             public uint dwMemoryLoad;               // Процент используемой памяти
@@ -83,12 +86,15 @@ namespace SystemMonitorByFobox
         {
             cpu = performanceCPU.NextValue();
             ram = performanceRAM.NextValue();
+            gpu = performanceCPU.NextValue();
 
             metroProgressBar1.Value = (int)cpu;
             metroProgressBar2.Value = (int)ram;
+            metroProgressBar3.Value = (int)gpu;
 
             metroLabel2.Text = Convert.ToString(Math.Round(cpu, 1)) + " %";
             metroLabel3.Text = Convert.ToString(Math.Round(ram, 1)) + " %";
+            metroLabel13.Text = Convert.ToString(Math.Round(gpu, 1)) + " %";
 
             metroLabel8.Text = Convert.ToString(Math.Round((ram / 100 * installedMemory) / 1073741824, 1)) + " Gb"; // Перевели в ГБ
             metroLabel9.Text = Convert.ToString(Math.Round((installedMemory - ram / 100 * installedMemory) / 1073741824, 1)) + " Gb"; // Перевели в ГБ
@@ -99,10 +105,14 @@ namespace SystemMonitorByFobox
             // Добавлем новые значения в историю
             cpuHistory.Enqueue(cpu);
             ramHistory.Enqueue(ram);
+            gpuHistory.Enqueue(gpu);
+
 
             while (cpuHistory.Count > historyLength) { cpuHistory.Dequeue(); } // Бляха, так-то можно if ебануть, но вдруг будет какой-то баг и число превысит 61. Хм-хм-хм
             
             while (ramHistory.Count > historyLength) {  ramHistory.Dequeue(); }
+
+            while (gpuHistory.Count > historyLength) {  gpuHistory.Dequeue(); }
 
             // Обновляем график
             UpdateChart();
@@ -148,12 +158,14 @@ namespace SystemMonitorByFobox
         {
             chart1.Series["CPU"].Points.Clear();
             chart1.Series["RAM"].Points.Clear();
+            chart1.Series["GPU"].Points.Clear();
 
             // Добавляем значения из истории в график
             for (int i = 0; i < cpuHistory.Count(); ++i)
             {
                 chart1.Series["CPU"].Points.AddY(cpuHistory.ElementAt(i));
                 chart1.Series["RAM"].Points.AddY(ramHistory.ElementAt(i));
+                chart1.Series["GPU"].Points.AddY(gpuHistory.ElementAt(i));
             }
         }
     }
