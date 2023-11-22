@@ -28,10 +28,11 @@ namespace SystemMonitorByFobox
         private Queue<float> ramHistory = new Queue<float>();
         private Queue<float> gpuHistory = new Queue<float>();
         private int historyLength = 60; // Длина истории в секундах
-
+        MemoryParameter RAM;
         public Form1()
         {
             InitializeComponent();
+            RAM = new MemoryParameter();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -81,23 +82,21 @@ namespace SystemMonitorByFobox
                                                  UnmanagedType.Bool говорит о том, что в неменеджерируемом коде ожидается, что значение представляет собой булевское значение */
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         static extern bool GlobalMemoryStatusEx([In, Out] MEMORYSTATUSEX lpBudder); // Она используется для получения информации о состоянии глобальной памяти. вляется внешней функцией из библиотеки kernel32.dll
-
         private void timer1_Tick(object sender, EventArgs e) // Таймер будет срабатывать каждую секунду и в нём будет происходить наша логика
         {
             cpu = performanceCPU.NextValue();
-            ram = performanceRAM.NextValue();
             gpu = performanceCPU.NextValue();
 
             metroProgressBar1.Value = (int)cpu;
-            metroProgressBar2.Value = (int)ram;
+            metroProgressBar2.Value = (int)RAM.GetValue();
             metroProgressBar3.Value = (int)gpu;
 
-            metroLabel2.Text = Convert.ToString(Math.Round(cpu, 1)) + " %";
-            metroLabel3.Text = Convert.ToString(Math.Round(ram, 1)) + " %";
+            metroLabel2.Text = $"{Convert.ToString(Math.Round(cpu, 1))} %";
+            metroLabel3.Text = RAM.GetRoundedValue();
             metroLabel13.Text = Convert.ToString(Math.Round(gpu, 1)) + " %";
 
-            metroLabel8.Text = Convert.ToString(Math.Round((ram / 100 * installedMemory) / 1073741824, 1)) + " Gb"; // Перевели в ГБ
-            metroLabel9.Text = Convert.ToString(Math.Round((installedMemory - ram / 100 * installedMemory) / 1073741824, 1)) + " Gb"; // Перевели в ГБ
+            metroLabel8.Text = RAM.GetUsingMemory();
+            metroLabel9.Text = RAM.GetAvailableMemory();
 
             //chart1.Series["CPU"].Points.AddY(cpu);
             //chart1.Series["RAM"].Points.AddY(ram);
