@@ -32,16 +32,17 @@ namespace SystemMonitorByFobox
                 {
                     hardwareItem.Update();
 
+                    gpu = hardwareItem.Sensors.Where(_ => _.SensorType == SensorType.Load && _.Name == "GPU Core").Single().Value.GetValueOrDefault();
 
-                    foreach (var sensor in hardwareItem.Sensors)
-                    {
-                        // Добавляем мониторинг для нужных сенсоров GPU, например, температуры, загрузки и т. д.
-                        if (sensor.SensorType == SensorType.Load && sensor.Name == "GPU Core") //"GPU Video Engine")
-                        {
-                            gpu = sensor.Value.GetValueOrDefault();
-                            break;
-                        }
-                    }
+                    //foreach (var sensor in hardwareItem.Sensors)
+                    //{
+                    //    // Добавляем мониторинг для нужных сенсоров GPU, например, температуры, загрузки и т. д.
+                    //    if (sensor.SensorType == SensorType.Load && sensor.Name == "GPU Core") //"GPU Video Engine")
+                    //    {
+                    //        gpu = sensor.Value.GetValueOrDefault();
+                    //        break;
+                    //    }
+                    //}
                 }
             }
             return gpu;
