@@ -35,7 +35,9 @@ namespace SystemMonitorByFobox
             ProgressBarCPU.Value = (int)CPU.GetValue(true);
             ProgressBarRAM.Value = (int)RAM.GetValue(true);
             ProgressBarGPU.Value = (int)GPU.GetValue();
-
+            metroLabel13.Text = Convert.ToString(Math.Round(gpu, 1)) + " %";
+            metroLabel13.Text = Convert.ToString(Math.Round(gpu, 1)) + " %";
+            metroLabel13.Text = Convert.ToString(Math.Round(gpu, 1)) + " %";
             metroLabel2.Text = CPU.GetRoundedValue();
             metroLabel3.Text = RAM.GetRoundedValue();
             metroLabel13.Text = GPU.GetRoundedValue();
@@ -43,6 +45,7 @@ namespace SystemMonitorByFobox
             metroLabel8.Text = RAM.GetUsingMemory();
             metroLabel9.Text = RAM.GetAvailableMemory();
             CounterProcessorTemperature.Text = CPU.GetTemperatureOfProcessor().ToString();
+
             //chart1.Series["CPU"].Points.AddY(cpu);
             //chart1.Series["RAM"].Points.AddY(ram);
 

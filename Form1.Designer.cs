@@ -171,6 +171,11 @@
             legend2.Name = "Legend1";
             this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(180, 342);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
+            this.chart1.Location = new System.Drawing.Point(163, 342);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
             series4.ChartArea = "ChartArea1";
