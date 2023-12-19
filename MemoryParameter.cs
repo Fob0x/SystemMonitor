@@ -37,7 +37,7 @@ namespace SystemMonitorByFobox
                 ManagementObjectCollection collection = searcher.Get();
 
                 foreach (ManagementObject obj in collection)
-            {
+                {
                     long totalMemory = Convert.ToInt64(obj["TotalPhysicalMemory"]);
                     installedMemory = (ulong)totalMemory;
                 }

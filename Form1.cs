@@ -4,14 +4,14 @@ using MetroFramework.Forms;
 
 namespace SystemMonitorByFobox
 {
-    public partial class Form1 : MetroForm
+    public partial class SystemMonitorWindow : MetroForm
     {
         private int historyLength = 60; // Длина истории в секундах
         MemoryParameter RAM;
         CentralProcessorParameter CPU;
         GPUEngine GPU;
         
-        public Form1()
+        public SystemMonitorWindow()
         {
             InitializeComponent();
             RAM = new MemoryParameter();
@@ -24,8 +24,8 @@ namespace SystemMonitorByFobox
             timer1.Interval = 1000; // МилиСекунд = 1 сек
             timer1.Start();
             
-            metroLabel10.Text = Convert.ToString(Math.Round(((float)RAM.GetInstalledMemory() / 1073741824), 1)) + " Gb"; // Зн-е возвращается в байтах, поэтому переводим в ГБ
-            metroLabel11.Text = CPU.GetNameOfProcessor();
+            CounterInstalledMemory.Text = Convert.ToString(Math.Round(((float)RAM.GetInstalledMemory() / 1073741824), 1)) + " Gb"; // Зн-е возвращается в байтах, поэтому переводим в ГБ
+            LabelProcessorName.Text = CPU.GetNameOfProcessor();
         }
 
         private void timer1_Tick(object sender, EventArgs e) // Таймер будет срабатывать каждую секунду и в нём будет происходить наша логика
@@ -38,9 +38,10 @@ namespace SystemMonitorByFobox
             metroLabel3.Text = RAM.GetRoundedValue();
             metroLabel13.Text = GPU.GetRoundedValue();
             
-            metroLabel8.Text = RAM.GetUsingMemory();
-            metroLabel9.Text = RAM.GetAvailableMemory();
+            CounterUsingMemory.Text = RAM.GetUsingMemory();
+            CounterAvailableMemory.Text = RAM.GetAvailableMemory();
             CounterProcessorTemperature.Text = CPU.GetTemperatureOfProcessor().ToString();
+            CounterGPUTemperature.Text = GPU.GetTemperatureOfGPU().ToString();
 
             // Добавлем новые значения в историю
             CPU.cpuHistory.Enqueue(CPU.GetValue());
@@ -58,7 +59,10 @@ namespace SystemMonitorByFobox
             UpdateChart();
 
             metroLabel14.Text = CPU.GetMinTemperatureOfCPU().ToString();
-            metroLabel15.Text = CPU.GetMaxTemperatureOfCPU().ToString();
+            CounterProcessorTemperatureMax.Text = CPU.GetMaxTemperatureOfCPU().ToString();
+
+            CounterGPUTemperatureMax.Text = GPU.GetMaxTemperatureOfGPU().ToString();
+            CounterGPUTemperatureMin.Text = GPU.GetMinTemperatureOfGPU().ToString();
         }
 
         private void UpdateChart()
