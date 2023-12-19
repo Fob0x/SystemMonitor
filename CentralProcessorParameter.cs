@@ -9,9 +9,7 @@ namespace SystemMonitorByFobox
     internal class CentralProcessorParameter : MainParameters
     {
         public CentralProcessorParameter() { }
-        string NameOfProcessor;
         public Queue<float> cpuHistory = new Queue<float>();
-        public static List<float> Temperatures;
         Double minTemperatureOfCPU = 200;
         Double maxTemperatureOfCPU;
         protected override void Init()

@@ -44,9 +44,6 @@ namespace SystemMonitorByFobox
             metroLabel9.Text = RAM.GetAvailableMemory();
             CounterProcessorTemperature.Text = CPU.GetTemperatureOfProcessor().ToString();
 
-            //chart1.Series["CPU"].Points.AddY(cpu);
-            //chart1.Series["RAM"].Points.AddY(ram);
-
             // Добавлем новые значения в историю
             CPU.cpuHistory.Enqueue(CPU.GetValue());
             RAM.ramHistory.Enqueue(RAM.GetValue());

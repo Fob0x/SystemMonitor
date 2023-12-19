@@ -48,7 +48,7 @@ namespace SystemMonitorByFobox
             return gpu;
         }
 
-        public string GetRoundedValue()
+        public override string GetRoundedValue()
         {
             return Convert.ToString(Math.Round(GetValue(), 1)) + " %";
         }
