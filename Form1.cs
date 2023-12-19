@@ -21,12 +21,10 @@ namespace SystemMonitorByFobox
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            metroLabel10.Text = Convert.ToString(Math.Round(((float)RAM.GetInstalledMemory() / 1073741824), 1)) + " Gb"; // Зн-е возвращается в байтах, поэтому переводим в ГБ
-
             timer1.Interval = 1000; // МилиСекунд = 1 сек
-
             timer1.Start();
-
+            
+            metroLabel10.Text = Convert.ToString(Math.Round(((float)RAM.GetInstalledMemory() / 1073741824), 1)) + " Gb"; // Зн-е возвращается в байтах, поэтому переводим в ГБ
             metroLabel11.Text = CPU.GetNameOfProcessor();
         }
 

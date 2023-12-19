@@ -3,22 +3,21 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Management;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SystemMonitorByFobox
 {
     internal class GPUEngine : MainParameters
     {
         public GPUEngine() { }
+
         public Queue<float> gpuHistory = new Queue<float>();
         float gpu;
+
         protected override void Init()
         {
             counter = new PerformanceCounter("Processor", "% Processor Time", "_total");
         }
+
         public float GetValue()
         {
             Computer computer = new Computer();
@@ -32,7 +31,7 @@ namespace SystemMonitorByFobox
                 {
                     hardwareItem.Update();
 
-                    gpu = hardwareItem.Sensors.Where(_ => _.SensorType == SensorType.Load && _.Name == "GPU Core").Single().Value.GetValueOrDefault();
+                    gpu = hardwareItem.Sensors.Where(sensor => sensor.SensorType == SensorType.Load && sensor.Name == "GPU Core").Single().Value.GetValueOrDefault();
 
                     //foreach (var sensor in hardwareItem.Sensors)
                     //{

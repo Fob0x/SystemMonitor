@@ -30,7 +30,6 @@ namespace SystemMonitorByFobox
 
         public float GetTemperatureOfProcessor()
         {
-
             Computer computer = new Computer();
             computer.CPUEnabled = true;
             computer.Open();
@@ -48,9 +47,6 @@ namespace SystemMonitorByFobox
                     }
                 }
             }
-
-           
-            
             return temperatureOfProcessor; 
         }
 
