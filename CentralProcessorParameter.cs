@@ -9,6 +9,7 @@ namespace SystemMonitorByFobox
     internal class CentralProcessorParameter : MainParameters
     {
         public CentralProcessorParameter() { }
+
         string NameOfProcessor;
         public Queue<float> cpuHistory = new Queue<float>();
         public static List<float> Temperatures;
@@ -32,7 +33,6 @@ namespace SystemMonitorByFobox
 
         public float GetTemperatureOfProcessor()
         {
-
             Computer computer = new Computer();
             computer.CPUEnabled = true;
             computer.Open();
@@ -50,9 +50,6 @@ namespace SystemMonitorByFobox
                     }
                 }
             }
-
-           
-            
             return temperatureOfProcessor; 
         }
 

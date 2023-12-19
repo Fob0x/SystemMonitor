@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Management;
 
@@ -11,6 +8,7 @@ namespace SystemMonitorByFobox
     internal class MemoryParameter : MainParameters
     {
         public MemoryParameter() { }
+
         ulong installedMemory = 0;
         const int conversionToGb = 1073741824;
         public Queue<float> ramHistory = new Queue<float>();

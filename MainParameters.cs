@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SystemMonitorByFobox
 {
@@ -12,8 +7,8 @@ namespace SystemMonitorByFobox
     {
         protected PerformanceCounter counter;
         protected float currentValue = 0f;
-        
-        public MainParameters() { Init(); }
+
+        public MainParameters() => Init();
 
         virtual protected void Init()
         {
@@ -21,6 +16,11 @@ namespace SystemMonitorByFobox
                 throw new Exception("Не указан PerfomanceCounter");
         }
 
+        /// <summary>
+        /// Получить значение параметра
+        /// </summary>
+        /// <param name="update">Получить следующее значение параметра</param>
+        /// <returns></returns>
         virtual public float GetValue(bool update = false)
         {
             if (update)
@@ -34,6 +34,4 @@ namespace SystemMonitorByFobox
             return Convert.ToString(Math.Round(currentValue, 1)) + " %";
         }
     }
-
-    
 }
