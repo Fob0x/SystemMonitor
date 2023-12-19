@@ -166,11 +166,11 @@
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(180, 342);
+            //chartArea2.Name = "ChartArea1";
+            //this.chart1.ChartAreas.Add(chartArea2);
+            //legend2.Name = "Legend1";
+            //this.chart1.Legends.Add(legend2);
+            //this.chart1.Location = new System.Drawing.Point(180, 342);
             chartArea2.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
